@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWash", "CarWash\CarWash.csproj", "{BFAA26E1-7335-4330-A48F-FFEC68EC1757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWash.Models", "CarWash.Models\CarWash.Models.csproj", "{030BE934-B5A0-4903-A030-D095C5A426C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWash.DataBase", "CarWash.DataBase\CarWash.DataBase.csproj", "{86F6F222-606F-4BBC-9A8B-32274BEB027C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFAA26E1-7335-4330-A48F-FFEC68EC1757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFAA26E1-7335-4330-A48F-FFEC68EC1757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFAA26E1-7335-4330-A48F-FFEC68EC1757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFAA26E1-7335-4330-A48F-FFEC68EC1757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{030BE934-B5A0-4903-A030-D095C5A426C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{030BE934-B5A0-4903-A030-D095C5A426C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{030BE934-B5A0-4903-A030-D095C5A426C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{030BE934-B5A0-4903-A030-D095C5A426C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F6F222-606F-4BBC-9A8B-32274BEB027C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F6F222-606F-4BBC-9A8B-32274BEB027C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F6F222-606F-4BBC-9A8B-32274BEB027C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F6F222-606F-4BBC-9A8B-32274BEB027C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

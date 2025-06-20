@@ -1,0 +1,95 @@
+﻿@page "/"
+@using CarWash.DataBase
+@rendermode InteractiveServer
+@inject ModelContext Ef
+
+<div class="upper-layout">
+    <div class="logo">
+        <h1>663</h1>
+        <h5>DETAILING</h5>
+    </div>
+    <div class="upper-adress">
+        <img src="Icon/Vector (4).svg"/>
+        <div class="upper-adress-text">
+            <h5>г. Самара, ул. Пушкина 11</h5>
+            <h6>Без выходных 08:00-22:00</h6>
+        </div>
+    </div>
+    <div class="upper-button-container">
+        @if (flage == false)
+        {
+            <button @onclick="Open">УСЛУГИ <img src="Icon/Vector (6).svg"/></button>
+        }
+        @if (flage)
+        { 
+            <button></button>
+        }
+        <button>КОНТАКТЫ</button>
+        <button>ОБУЧЕНИЕ</button>
+        <button>ВАКАНСИИ</button>
+        <button>НОВОСТИ</button>
+    </div>
+    <div class="upper-button-profile">
+        <button>ПРОФИЛЬ<img src="Icon/Vector (5).svg"/></button>
+    </div>
+</div>
+@if (flage)
+{
+    <div class="yslugi">
+        <button @onclick="Open">УСЛУГИ <img src="Icon/Vector (6).svg"/></button>
+        <button>МОЙКА</button>
+        <button>ДЕТЕЙЛИНГ</button>
+        <button>ДРУГИЕ<br/>УСЛУГИ</button>
+    </div>
+}
+
+
+<div class="fon">
+    <div class="content">
+        <div class="content-text">
+            <h1>ДЕТЕЙЛИНГ АВТОМОЙКА </h1>
+            <h3>
+                В Самаре<br/>
+                Полный спектр услуг. От мойки до удаления вмятин<br/>
+                Премиум-расходники, без экономии на качестве!<br/>
+                Лаунж-зона для ожидания с вкусным кофе и авторским чаем<br/>
+            </h3>
+        </div>
+        <div class="content-button">
+            <button @onclick="Open2">ЗАПИСАТЬСЯ К НАМ</button>
+        </div>
+    </div>
+    <div class="content-jiga">
+        <img src="Image/3P1tZDwDODg-no-bg-preview (carve.photos) 1.png"/>
+    </div>
+    @if (flage2)
+    {
+        <div class="context-axtion">
+            <h2>ЗАПИСАТЬСЯ НА МОЙКУ</h2>
+            <h3>Запишитесь при помощи своего аккаунта</h3>
+            <input placeholder="ВАШ ЛОГИН"/>
+            <input placeholder="ПАРОЛЬ"/>
+            <select>
+                <option></option>
+            </select>
+            <button>ЗАПИСАТЬСЯ</button>
+        </div>
+    }
+    
+</div>
+
+@code
+{
+    private bool flage { get; set; }
+    private bool flage2 { get; set; }
+
+    public void Open()
+    {
+        flage = !flage;
+    }
+
+    public void Open2()
+    {
+        flage2 = !flage2;
+    }
+}
