@@ -13,6 +13,6 @@ public class ModelContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.UseSqlite("Data Source=PracticalDataBase.db");
+        optionsBuilder.UseSqlite("Data Source=CarWash.db");
     }
 }

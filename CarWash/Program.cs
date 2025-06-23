@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using CarWash.Components;
 using CarWash.DataBase;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddDbContext<ModelContext>();
+builder.Services.AddBlazoredLocalStorage();
 
 var app = builder.Build();
 

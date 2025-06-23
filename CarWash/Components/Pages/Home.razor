@@ -1,7 +1,10 @@
 ﻿@page "/"
 @using CarWash.DataBase
+@using CarWash.Models
+@using Microsoft.EntityFrameworkCore
 @rendermode InteractiveServer
 @inject ModelContext Ef
+@inject Blazored.LocalStorage.ILocalStorageService Ls
 
 <div class="upper-layout">
     <div class="logo">
@@ -30,7 +33,7 @@
         <button>НОВОСТИ</button>
     </div>
     <div class="upper-button-profile">
-        <button>ПРОФИЛЬ<img src="Icon/Vector (5).svg"/></button>
+        <button @onclick="Open3">ПРОФИЛЬ<img src="Icon/Vector (5).svg"/></button>
     </div>
 </div>
 @if (flage)
@@ -45,20 +48,20 @@
 
 
 <div class="fon">
-    <div class="content">
-        <div class="content-text">
-            <h1>ДЕТЕЙЛИНГ АВТОМОЙКА </h1>
-            <h3>
-                В Самаре<br/>
-                Полный спектр услуг. От мойки до удаления вмятин<br/>
-                Премиум-расходники, без экономии на качестве!<br/>
-                Лаунж-зона для ожидания с вкусным кофе и авторским чаем<br/>
-            </h3>
+        <div class="content">
+            <div class="content-text">
+                <h1>ДЕТЕЙЛИНГ АВТОМОЙКА </h1>
+                <h3>
+                    В Самаре<br/>
+                    Полный спектр услуг. От мойки до удаления вмятин<br/>
+                    Премиум-расходники, без экономии на качестве!<br/>
+                    Лаунж-зона для ожидания с вкусным кофе и авторским чаем<br/>
+                </h3>
+            </div>
+            <div class="content-button">
+                <button @onclick="Open2">ЗАПИСАТЬСЯ К НАМ</button>
+            </div>
         </div>
-        <div class="content-button">
-            <button @onclick="Open2">ЗАПИСАТЬСЯ К НАМ</button>
-        </div>
-    </div>
     <div class="content-jiga">
         <img src="Image/3P1tZDwDODg-no-bg-preview (carve.photos) 1.png"/>
     </div>
@@ -67,22 +70,154 @@
         <div class="context-axtion">
             <h2>ЗАПИСАТЬСЯ НА МОЙКУ</h2>
             <h3>Запишитесь при помощи своего аккаунта</h3>
-            <input placeholder="ВАШ ЛОГИН"/>
-            <input placeholder="ПАРОЛЬ"/>
-            <select>
-                <option></option>
-            </select>
-            <button>ЗАПИСАТЬСЯ</button>
+            <input @bind="_user.Login" placeholder="ВАШ ЛОГИН"/>
+            <input @bind="_user.Password" placeholder="ПАРОЛЬ"/>
+            <div class="context-axtion-dropdown-menu-container">
+                <button @onclick="Open2mini">ВЫБЕРИТЕ УСЛУГУ</button>
+                <input @bind="_signUp.StartDate" type="date" placeholder="ЖЕЛАЕМАЯ ДАТА"/>
+            </div>
+            <div class="context-axtion-menu-container">
+                @if (flage2mini)
+                {
+                <div class="context-axtion-menu">
+                    <button @onclick="SetService1">МОЙКА</button>
+                    <button @onclick="SetService2">ДЕТЕЙЛИНГ</button>
+                    <button @onclick="SetService3">ДРУГИЕ<br/>УСЛУГИ</button>
+                </div>
+                }
+            </div>
+            <button @onclick="Accept" class="context-axtion-accept">ЗАПИСАТЬСЯ</button>
+            @eror
         </div>
     }
-    
+    @if (flage3)
+    {
+        <div class="context-axtion">
+            <h2>ПРОФИЛЬ</h2>
+            <h3>Зарегистрируйтесь или войдите в свой аккаунт</h3>
+            <input @bind="_user.Login" placeholder="ВАШ ЛОГИН"/>
+            <input @bind="_user.Password" placeholder="ПАРОЛЬ"/>
+            <div class="profile-input">
+                <button @onclick="CreateNewUser" class="context-axtion-accept">ЗАРЕГЕСТРИРОВАТЬСЯ</button>
+                <button @onclick="Login" class="context-axtion-accept">ВОЙТИ</button>
+            </div>
+            @eror
+        </div>
+    }
+    @if (flage4)
+    {
+        <div class="context-axtion">
+            <h2>ПРОФИЛЬ</h2>
+            <h3>ИСТОРИЯ ЗАПИСЕЙ</h3>
+            <div class="story">
+                @foreach (var item in _signUps)
+                {
+                    <div>Название @item.Service.Description</div>
+                    <div>Дата @item.StartDate</div>
+                    <div>Статус оплаты @item.Payment.IsPaid</div>
+                }
+            </div>
+            @eror
+        </div>
+    }
 </div>
 
 @code
 {
+    private User _user = new User();
+    private Service _service = new Service();
+    private User _authUser = new User();
+    private SignUp _signUp = new SignUp();  
+    private Payment _payment = new Payment();
+    private List<SignUp> _signUps = new List<SignUp>();
+    private bool IsAuth;
+    private string eror { get; set; }
+
+    private void Accept()
+    {
+        try
+        {
+            _authUser = Ef.Users.FirstOrDefault(u => u.Login == _user.Login && u.Password == _user.Password) ?? null;
+            if (_authUser !=null)
+            {
+                _payment.UserId = _authUser.Id;
+                _signUp.UserId = _authUser.Id;
+                _signUp.ServiceId = _service.Id;
+                _signUp.PaymentId = _payment.Id;
+                Ef.Add(_signUp);
+                Ef.SaveChanges();
+            }
+            else
+            {
+                eror = "ПОХОЖЕ ТАКОЙ УЧЕТНОЙ ЗАПИСИ НЕ СУЩЕСТВУЕТ ЗАРЕГИСТРИРУЙТЕСЬ ВО ВКЛАДКЕ ПРОФИЛЬ";
+            }
+        }
+        catch (Exception e)
+        {
+            eror = e.Message;
+        }
+    }
+
+    private void Login()
+    {
+        try
+        {
+            _authUser = Ef.Users.FirstOrDefault(u => u.Login == _user.Login && u.Password == _user.Password) ?? null;
+            if (_authUser == null)
+            {
+            eror = "ПОХОЖЕ ТАКОЙ УЧЕТНОЙ ЗАПИСИ НЕ СУЩЕСТВУЕТ, ЗАРЕГИСТРИРУЙТЕСЬ";
+            }
+            else
+            {
+                IsAuth = true;
+                flage3 = false;
+                flage4 = true;
+                _signUps = Ef.SignUps.OrderBy(s => s.UserId == _authUser.Id).ToList();
+            }
+        }
+        catch (Exception e)
+        {
+            eror = e.Message;
+        }
+        
+    }
+
+    private void CreateNewUser()
+    {
+        try
+        {
+            Ef.Add(_user);
+            Ef.SaveChanges();
+            flage3 = false;
+            IsAuth = true;
+        }
+        catch (Exception e)
+        {
+            eror = e.Message;
+        }
+       
+    }
+
+    private void SetService1()
+    {
+        _service.Id = 1;
+    }
+    private void SetService2()
+    {
+        _service.Id = 2;
+    }
+    private void SetService3()
+    {
+        _service.Id = 3;
+    }
+    
     private bool flage { get; set; }
     private bool flage2 { get; set; }
+    private bool flage2mini { get; set; }
+    private bool flage3 { get; set; }
+    private bool flage4 { get; set; }
 
+        
     public void Open()
     {
         flage = !flage;
@@ -91,5 +226,18 @@
     public void Open2()
     {
         flage2 = !flage2;
+        flage = false;
+    }
+    public void Open2mini()
+    {
+        flage2mini = !flage2mini;
+    }
+
+    public void Open3()
+    {
+        flage3 = !flage3;
+        flage = false;
+        flage2 = false;
+        flage2mini = false;
     }
 }

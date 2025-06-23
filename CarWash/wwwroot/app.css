@@ -224,20 +224,134 @@ h1:focus {
     background: none;
 }
 .context-axtion{
-    border-radius: 20px;
-    margin-top: 10%;
+    padding: 50px;
+    border-radius: 30px;
+    margin-top: 5%;
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50.5%);
     z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
+    flex-direction: column;
     align-items: center;
     min-width: 100px;
     min-height: 100px;
-    width: 50%;
+    width: 40%;
     height: 70%;
     background: #ffffff;
-    background: linear-gradient(180deg,rgba(255, 255, 255, 0.68) 0%, rgba(115, 115, 115, 0.63) 100%)
+    box-shadow: 0px 12px 8px -6px rgba(34, 60, 80, 0.2) inset;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(101, 101, 101, 0.8) 100%)
+}
+.context-axtion h2{
+    font-family: Finlandica, sans-serif;
+    color: rgba(60, 54, 54, 0.8);
+}
+.context-axtion h3{
+    color: rgba(60, 54, 54, 0.6);
+    padding-bottom: 60px;
+}
+.context-axtion input{
+    font-size: 18pt;
+    padding: 10px;
+    height: 60px;
+    border: none;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: rgba(217, 217, 217, 1);
+    box-shadow: 0px 12px 8px -6px rgba(34, 60, 80, 0.2) inset;
+    border-radius: 5px;
+    font-family: Finlandica, sans-serif;
+    color: rgba(60, 54, 54, 0.6);
+}
+.context-axtion-dropdown-menu-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0;
+}
+.context-axtion-dropdown-menu-container button{
+    font-size: 18pt;
+    padding: 10px;
+    height: 60px;
+    border: none;
+    width: 48%;
+    margin-bottom: 0;
+    background-color: rgba(217, 217, 217, 1);
+    box-shadow: 0px 12px 8px -6px rgba(34, 60, 80, 0.2) inset;
+    border-radius: 5px;
+    color: rgba(60, 54, 54, 0.6);
+    font-family: Finlandica, sans-serif;
+    text-align: start;
+}
+.context-axtion-dropdown-menu-container input{
+    font-size: 18pt;
+    font-family: Finlandica, sans-serif;
+    color: rgba(60, 54, 54, 0.6);
+    width: 48%;
+    margin-bottom: 0;
+}
+.context-axtion-menu-container{
+    display: block;
+    min-height: 150px;
+    width: 100%;
+    align-items: start;
+}
+.context-axtion-menu{
+    font-family: Finlandica, sans-serif;
+    display: flex;
+    max-width: 45%;
+    flex-direction: column;
+    border-radius: 5px;
+    background: rgba(217, 217, 217, 0.65);
+}
+.context-axtion-menu button{
+    color: rgba(60, 54, 54, 0.6);
+    padding: 5px;
+    font-size: 12pt;
+    border: none;
+    background: none;
+    text-align: start;
+}
+.context-axtion-accept{
+    font-family: Finlandica, sans-serif;
+    border: none;
+    padding: 10px;
+    height: 60px;
+    width: 45%;
+    margin-bottom: 0;
+    background-color: rgba(217, 217, 217, 1);
+    box-shadow: 0px 12px 8px -6px rgba(34, 60, 80, 0.2) inset;
+    border-radius: 5px;
+    color: rgba(60, 54, 54, 0.6);
+    font-size: 18pt;
+}
+.profile-input{
+    font-size: 18pt;
+    padding: 10px;
+    height: 60px;
+    border: none;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-family: Finlandica, sans-serif;
+    color: rgba(60, 54, 54, 0.6);
+}
+.profile-input button{
+    font-size: 18pt;
+    padding: 10px;
+    height: 60px;
+    border: none;
+    width: 48%;
+    margin-bottom: 0;
+    background-color: rgba(217, 217, 217, 1);
+    box-shadow: 0px 12px 8px -6px rgba(34, 60, 80, 0.2) inset;
+    border-radius: 5px;
+    color: rgba(60, 54, 54, 0.6);
+    font-family: Finlandica, sans-serif;
+}
+.story{
+    font-family: Finlandica, sans-serif;
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 15px;
 }
